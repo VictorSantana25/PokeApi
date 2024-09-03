@@ -6,7 +6,7 @@
   </mat-card-header>
   <img
     mat-card-image
-    src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+    [src]= "imagenDelPadre ? imagenDelPadre : imagen"
     alt="Photo of a Shiba Inu"
   />
   <mat-card-content>
@@ -17,8 +17,8 @@
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
+    <button mat-button (click)="setName()">Ir al lado oscuro</button>
+    <button mat-button (click)="emisor.emit(entrada.value)">SHARE</button>
   </mat-card-actions>
 </mat-card>
 
@@ -33,10 +33,26 @@
   <mat-card-content>
     <mat-form-field appearance="fill">
       <mat-label>Ingrese su nombre</mat-label>
-      <input matInput [(ngModel)]="nombre" placeholder="Ingrese su nombre" />
+      <input matInput [(ngModel)]="nombre" #entrada placeholder="Ingrese su nombre" />
       <mat-icon matSuffix>fingerprint</mat-icon>
       <mat-hint>Ingrese su nombre completo</mat-hint>
     </mat-form-field>
     <h1>El nombre ingresado es: {{nombre}}</h1>
+    @if(nombre === 'Darth Vader'){
+    <h1>No entres al lado oscuro</h1>
+    } @else {
+    @if(nombre.length > 0){
+<h1>Hola {{nombre}}</h1>
+  }
+}
+<h1 *ngIf="nombre === 'Darth Vader'">Jamás retornas de el</h1>
+
+<ul>
+  @for (item of nombres; track $index){
+    <li>
+      Hola {{item}}
+    </li>
+  }
+</ul>
   </mat-card-content>
 </mat-card>
